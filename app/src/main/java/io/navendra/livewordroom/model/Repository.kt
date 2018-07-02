@@ -20,6 +20,8 @@ class WordRepository internal constructor(application: Application) {
         InsertAsyncTask(mWordDao).execute(word)
     }
 
+    fun getAllWords() = allWords
+
     private class InsertAsyncTask internal constructor(private val mAsyncTaskDao: WordDAO) : AsyncTask<Word, Void, Void>() {
 
         override fun doInBackground(vararg params: Word): Void? {
