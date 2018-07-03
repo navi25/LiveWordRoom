@@ -22,4 +22,6 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
         mRepository.insert(word)
     }
 
+    fun getAllWords() = allWords
+
 }
