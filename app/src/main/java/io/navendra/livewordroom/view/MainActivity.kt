@@ -24,11 +24,12 @@ import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    //region VARIABLES
     private val NEW_WORD_ACTIVITY_REQUEST_CODE = 1
-
     private lateinit var mWordViewModel: WordViewModel
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: WordListAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
+    //endregion
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +41,9 @@ class MainActivity : AppCompatActivity() {
         mWordViewModel = ViewModelProviders.of(this).get(WordViewModel::class.java)
         mWordViewModel.getAllWords().observe(this, Observer {
             if(it!=null){
-                viewAdapter = WordListAdapter(this,it)
+                viewAdapter.mWords = it
                 viewAdapter.notifyDataSetChanged()
+
             }
         })
 
@@ -53,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun initRecycler(){
         viewManager = LinearLayoutManager(this)
-        viewAdapter = WordListAdapter(this, emptyList())
+        viewAdapter = WordListAdapter(this)
         recyclerview.apply {
             setHasFixedSize(true)
             layoutManager = viewManager

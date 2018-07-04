@@ -9,10 +9,12 @@ import android.view.View
 import io.navendra.livewordroom.R
 import android.content.Context
 
-class WordListAdapter (context: Context, words: List<Word>) : RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
+class WordListAdapter (context: Context) : RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
 
+    //region VARIABLES
     private val mInflater: LayoutInflater
     var mWords: List<Word>? = null // Cached copy of words
+    //endregion
 
     inner class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val wordItemView: TextView
@@ -24,7 +26,6 @@ class WordListAdapter (context: Context, words: List<Word>) : RecyclerView.Adapt
 
     init {
         mInflater = LayoutInflater.from(context)
-        mWords = words
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
@@ -42,10 +43,10 @@ class WordListAdapter (context: Context, words: List<Word>) : RecyclerView.Adapt
         }
     }
 
-
-
-    // getItemCount() is called many times, and when it is first called,
-    // mWords has not been updated (means initially, it's null, and we can't return null).
+    /**
+     * getItemCount() is called many times, and when it is first called,
+     * mWords has not been updated (means initially, it's null, and we can't return null).
+     */
     override fun getItemCount(): Int {
         return if (mWords != null)
             mWords!!.size
